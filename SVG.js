@@ -4,6 +4,7 @@ var foodEaten = 0;
 
 var health1 = 250;
 var health2 = 650;
+var timeStart = Date.now()
 
 // randomNumber returns a random number between min and max
 function randomNumber(min,max)
@@ -45,9 +46,21 @@ document.getElementById("megamans").setAttribute("x", megamanX + 15)
     document.getElementById("health1").setAttribute("x", randX)
     foodEaten = foodEaten + 1
     document.getElementById("score").textContent = foodEaten
-
-
   }
+  else if(megamanX > health2X && megamanY < health2Y + 80 && megamanY > health2Y && megamanY < health2Y + 80) {
+    console.log("overlap")
+    var randX = randomNumber(50,750)
+    document.getElementById("health2").setAttribute("x", randX)
+    foodEaten = foodEaten + 1
+    document.getElementById("score").textContent = foodEaten
+  }
+  if (foodEaten == 5) {
+    document.getElementById("screen").pauseAnimation()
+    var timeStop = Date.now()
+    var duration = timeStop - timeStart
+    document.getElementById("totaltime").textContent = duration
+  }
+
 
 
 
