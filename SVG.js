@@ -1,7 +1,7 @@
 var megamanX = 375;
 var megamanY  = 0;
 var foodEaten = 0;
-
+var gameOver = false;
 var health1 = 250;
 var health2 = 650;
 var timeStart = Date.now()
@@ -13,7 +13,8 @@ function randomNumber(min,max)
 }
 
 document.addEventListener("keydown", function(e) {
-if(e.keyCode == 37){
+if(gameOver == false) {
+  if(e.keyCode == 37){
 
 document.getElementById("megamans").setAttribute("x", megamanX - 15)
   megamanX = megamanX - 15;
@@ -45,21 +46,26 @@ document.getElementById("megamans").setAttribute("x", megamanX + 15)
     var randX = randomNumber(50,750)
     document.getElementById("health1").setAttribute("x", randX)
     foodEaten = foodEaten + 1
-    document.getElementById("score").textContent = foodEaten
+    document.getElementById("score").textContent = "Food ate: " + foodEaten
   }
   else if(megamanX > health2X && megamanY < health2Y + 80 && megamanY > health2Y && megamanY < health2Y + 80) {
     console.log("overlap")
     var randX = randomNumber(50,750)
     document.getElementById("health2").setAttribute("x", randX)
     foodEaten = foodEaten + 1
-    document.getElementById("score").textContent = foodEaten
+    document.getElementById("score").textContent = "Food ate:" + foodEaten
   }
-  if (foodEaten == 5) {
-    document.getElementById("screen").pauseAnimation()
+  if (foodEaten >= 5) {
+    document.getElementById("screen").pauseAnimations()
     var timeStop = Date.now()
-    var duration = timeStop - timeStart
+    var duration = (timeStop - timeStart)/1000
     document.getElementById("totaltime").textContent = duration
   }
+
+else{
+
+}
+}
 
 
 
